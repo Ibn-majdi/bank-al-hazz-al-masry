@@ -15,10 +15,10 @@ cards, and cinematic realistic visuals.
 |---|---|
 | Name | بنك الحظ المصري — محافظات |
 | Platform | Google Play app, Unity + C#, GitHub |
-| Visual style | Realistic + cinematic animation |
+| Visual style | Modern clean Egyptian, colourful and strong, Nile blue primary, light interface, medium rounded buttons, square cards. Card/character style close to Legends of Runeterra in structure only, not its identity or colours, no fantasy blue. Pharaonic is seasons/events only, never the base theme |
 | Language | Arabic (RTL) + English |
 | Solo mode | 2 players vs AI, timed 15 / 30 / 45 / 60 min, player picks duration before start, computer is banker automatically |
-| Online mode | Rooms inside the game, invite / code, up to 4 players + 1 human banker = 5 in room, classic open (1 hour+, players decide) |
+| Online mode | Rooms inside the game, invite / code, up to 4 players. Bank is a virtual character, not a player seat: standing on the left of the table, next to a scoreboard, cashier drawer in front. Tapping the scoreboard shows each player's score/balance, cities owned, and whose turn it is. Classic open (1 hour+, players decide) |
 | Board | Selectable 28 / 32 / 40 squares, room creator chooses |
 | Rules | Hasbro classic: start 1500 EGP, GO 200 EGP, jail fine 50 EGP, houses 50/100/150/200 by colour group, hotel after 4 houses (3 in 15-min Quick), auctions ON, trading cash/deeds/jail cards only, mortgage half price +10% to lift |
 | Monetization | Free with in-app purchases: characters/pieces, board skins, in-game currency |
@@ -60,7 +60,7 @@ ProjectSettings/ Unity project settings
 
 ## Build (Unity)
 
-- Unity 2022.3 LTS or newer (URP not required for v1).
+- Unity 6.6 (6000.6.10f1) with Android Build Support (SDK + NDK + OpenJDK). Project was migrated from Unity 2022.3.20f1 to Unity 6.6 on 2026-11-25 at the owner's request; ProjectVersion.txt is 6000.6.10f1, Android target SDK 35.
 - Open the project folder in Unity Hub, open `Assets/Scenes/MainScene.unity`.
 - Android: File → Build Settings → Android, build an `.aab` for Google Play.
 - No web build is produced by this project.

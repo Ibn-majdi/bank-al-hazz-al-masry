@@ -1,11 +1,11 @@
 # Game Design Document — بنك الحظ المصري: محافظات
 # Bank Al-Hazz Al-Masry: Governorates
 
-**Version:** 1.0 — Core skeleton (2026-11-25)
-**Status:** Final shape agreed with the owner. Minor details (specific avatar
+**Version:** 1.1 — Unity 6.6 migration (2026-11-25)
+**Status:** Final shape agreed with the owner, updated for Unity 6.6. Minor details (specific avatar
 names, specific store prices, final governorate list) are deferred — build the
 core first, with placeholder governorate names that can be swapped later.
-**Platform:** Google Play app — Unity + C# (NOT a web game)
+**Platform:** Google Play app — Unity 6.6 + C# (NOT a web game)
 **Repository:** `bank-al-hazz-al-masry` on GitHub
 
 ---
@@ -15,8 +15,23 @@ core first, with placeholder governorate names that can be swapped later.
 A professional mobile board game in the spirit of classic Monopoly, reskinned
 for Egypt. Players travel around a board of Egyptian governorates and famous
 places, buy them, charge rent, build houses and hotels, and bankrupt their
-opponents. The game is realistic in style with cinematic animation, in Arabic
-(RTL) and English, free with in-app purchases.
+opponents. The game is modern and clean in every element, modern Egyptian identity,
+colourful and strong, Nile blue primary, light interface — not pharaonic in the
+base theme (pharaonic and other themes are seasons/events only). Card and
+character style is close to Legends of Runeterra in structure only, not its
+identity or colours, no fantasy blue. In Arabic (RTL) and English, free with
+in-app purchases.
+
+Scene: square 3D board like a real table, 4 chairs around it, one per player.
+The bank is a virtual character, not a player: standing on the left of the
+table, next to a scoreboard where he writes the score, cashier drawer in front
+like a bank. Tapping the scoreboard shows each player's score/balance, how many
+cities each owns, and whose turn it is. The player whose turn it is has a
+spotlight on him. When he rolls the dice, the camera zooms to the board full
+screen and shows the piece/car and dice moving. When he stops on a city, its
+card appears with all its info and a 3D image of the city inside it — no
+characters in city cards — with Buy or Pass if unowned. If he buys, the camera
+moves to the table scene and the player pays the bank.
 
 Reference for the feel (not the rules or art): Yu-Gi-Oh! Master Duel —
 polished, animated, competitive, room-based online play.
@@ -27,10 +42,10 @@ polished, animated, competitive, room-based online play.
 |---|---|
 | Name | بنك الحظ المصري — محافظات |
 | Platform | Google Play app, Unity + C#, project on GitHub |
-| Visual style | Realistic + cinematic animation |
+| Visual style | Modern clean Egyptian, colourful and strong, Nile blue primary, light interface, medium rounded buttons, square cards. LoR structure only, not its identity/colours, no fantasy blue. Pharaonic = seasons/events only |
 | Language | Arabic (RTL) + English, same amounts in both languages |
 | Solo mode | 2 players vs AI. Timed 15 / 30 / 45 / 60 min, player picks duration before start. Computer is banker automatically. |
-| Online mode | Rooms inside the game, invite / code. Up to 4 players + 1 human banker = 5 in room. Classic open (1 hour+, players decide). |
+| Online mode | Rooms inside the game, invite / code. Up to 4 players. Bank is virtual, not a player seat. Classic open (1 hour+, players decide). |
 | Board | Selectable 28 / 32 / 40 squares. Room creator chooses. |
 | Rules | Hasbro classic (see §4). Start 1500 EGP, GO 200 EGP, jail fine 50 EGP. |
 | Monetization | Free with in-app purchases: characters/pieces, board skins, in-game currency — all of them. |
@@ -52,10 +67,9 @@ polished, animated, competitive, room-based online play.
 - Host creates a room, sets: board size (28/32/40), match length, turn timer,
   starting cash, GO salary, auctions on/off.
 - Invite by link or room code; players enter the code to join.
-- Up to 4 playing seats + 1 optional non-playing human banker seat = 5 in room.
-- Human banker is an auctioneer / announcer only: **no power to create money,
-  lend, set prices, or override the server ledger**. The server is the banker
-  by default and always holds the true state.
+- Up to 4 playing seats. Bank is virtual, not a player seat: standing on the
+  left, scoreboard beside him, cashier drawer in front. The server is the
+  banker by default and always holds the true state.
 - Spectators can watch but not play.
 - Disconnect: seat is held, player may rejoin with a catch-up summary; if
   they do not return, an AI of the same difficulty takes the seat.
@@ -223,7 +237,8 @@ price ladder in §4.2):
 
 ## 8. Technical plan (Unity + C#)
 
-- Engine: Unity 2022.3 LTS, C#. Android build (.aab) for Google Play.
+- Engine: Unity 6.6 (6000.6.10f1), C#. Android build (.aab) for Google Play.
+  Migrated from Unity 2022.3.20f1 on 2026-11-25. Android target SDK 35, min SDK 24.
 - Architecture: `GameManager` owns the turn loop and timers; `Board` owns
   squares; `Bank` owns money supply, houses/hotels, auctions, mortgages;
   `NetworkRoom` owns lobby + server-authoritative state; AI via `AIManager`.
@@ -242,6 +257,6 @@ price ladder in §4.2):
 2. [ ] Unity scene wiring: board, UI, dice, tokens
 3. [ ] Solo vs AI playable (2p, timed, classic rules)
 4. [ ] Art + audio + cinematic animation
-5. [ ] Online rooms + human banker seat
+5. [ ] Online rooms + virtual banker
 6. [ ] Store + in-app purchases
 7. [ ] Playtesting (28/32-board balance) + Google Play release
